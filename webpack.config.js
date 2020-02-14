@@ -1,15 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // 添加在这里
-
 module.exports = {
   entry: {
     app: ['./src/index.js']
   },
   output: {
-    path: path.resolve(__dirname, 'build/'),
-    publicPath: '/assets/',
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
+    filename: '[name][hash].js'
   },
   devServer: {
     contentBase: 'build/',
@@ -18,10 +17,15 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      //添加在这里
       template: path.resolve(__dirname, './index.html'),
       filename: 'index.html',
-      inject: 'body'
-    })
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };

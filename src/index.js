@@ -22,13 +22,15 @@ const bindViewToData = (root, data) => {
   watchTextNode(root, data);
 };
 
-const appData = {
-  firstName: 'tiny',
-  lastName: 'huang',
-  age: 13,
-  list: [1, 2]
+const vm = {
+  appData: {
+    firstName: 'tiny',
+    lastName: 'huang',
+    age: 13,
+    list: [1, 2]
+  }
 };
-bindViewToData(document.querySelector('#root'), appData);
+bindViewToData(document.querySelector('#root'), vm.appData);
 
 appData.firstName = 'mini';
 appData.age = 22;
